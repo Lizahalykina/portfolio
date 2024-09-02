@@ -1,0 +1,25 @@
+.item-container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    z-index: 2;
+}
+
+.item-picture {
+    width: 50px;
+    margin: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: transform 0.1s, box-shadow 0.1s;
+    cursor: pointer;
+    position: relative;
+}
+
+.item-picture:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+    z-index: 10;
+}

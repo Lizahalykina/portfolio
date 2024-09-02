@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import TopMenu from './components/Menu/TopMenu/TopMenu';
+import BottomMenu from './components/Menu/BottomMenu/BottomMenu';
+import CharacterSetup from './components/GroupSetup/CharacterSetup';
+import WallSetup from './components/GroupSetup/WallSetup';
+import FloorSetup from './components/GroupSetup/FloorSetup';
+import IntroScreen from './components/IntroScreen/IntroScreen';
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleIntroClose = () => {
+    setShowIntro(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="black-screen">
+      {showIntro && <IntroScreen onClose={handleIntroClose} />}
+      <TopMenu />
+      <div className="frame">
+        <div className="app-container">
+          <CharacterSetup />
+          <WallSetup />
+          <FloorSetup />
+        </div>
+      </div>
+      <BottomMenu />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,28 @@
+.side-menu-container {
+    position: absolute;
+    display: flex;
+    background-color: rgb(31, 31, 31);
+    top: 6%;
+    right: 14%;
+    bottom: 1%;
+    width: 150px;
+}
+
+.side-menu-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.side-menu-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    color: white;
+    font-size: 1.2rem;
+}

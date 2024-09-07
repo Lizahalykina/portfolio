@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TopMenu from './components/Menu/TopMenu/TopMenu';
 import BottomMenu from './components/Menu/BottomMenu/BottomMenu';
+import SideMenu from './components/Menu/SideMenu/SideMenu';
 import CharacterSetup from './components/GroupSetup/CharacterSetup';
 import WallSetup from './components/GroupSetup/WallSetup';
 import FloorSetup from './components/GroupSetup/FloorSetup';
@@ -25,6 +26,7 @@ const App: React.FC = () => {
           <WallSetup />
           <FloorSetup />
         </div>
+        <SideMenu />
       </div>
       <BottomMenu />
     </div>

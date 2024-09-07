@@ -1,40 +1,28 @@
 .action-menu-container {
     display: flex;
     align-items: center;
-    background-color: rgb(116, 116, 116);
-    bottom: 8%;
-    width: 500px;
-    height: 100px;
-
+    background-color: rgb(95, 95, 95);
+    width: 90%;
+    height: 120px;
 }
 
-.action-menu-background {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
 
 .action-task {
     display: flex;
     flex-direction: column;
-    background-color: rgb(94, 94, 94);
     padding: 10px;
-    width: 100%;
+    height: 80%;
     align-items: left;
     margin: 20px;
 }
 
-h3,p {
+p {
     margin: 0;
     padding: 0;
 }
 
 .task-picture {
-    height: 70%;
+    height: 80%;
     z-index: 1;
     margin: 20px;
 }

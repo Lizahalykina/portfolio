@@ -1,4 +1,4 @@
-.intro-screen {
+.wanted-screen {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,25 +8,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 999;
 }
 
-.intro-content {
+.wanted-content {
     background-color: rgb(221, 221, 221);
+    height: 500px;
+    width: 350px;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
 }
+.wanted-container {
+    display: flex;
+    flex-direction: row;
+}
 
-.intro-content h3 {
+.wanted-picture {
+    width: 40%;
+    justify-content: space-between;
+    margin: 50px 40px 50px 10px;
+    z-index: 1;
+}
+
+.wanted-content h3 {
     margin: 0 0 10px;
 }
 
-.intro-content p {
+.wanted-content p {
     margin: 0 0 20px;
 }
 
-.intro-content button {
+.wanted-content button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -35,6 +48,6 @@
     cursor: pointer;
 }
 
-.intro-content button:hover {
+.wanted-content button:hover {
     background-color: #222222;
 }

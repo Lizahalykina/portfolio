@@ -9,8 +9,8 @@ const BottomMenu: React.FC = () => {
       <img src="/assets/BottomMenu.png" alt="Bottom Menu" className="bottom-menu-background" />
       <div className="bottom-menu-items">
         <ActionMenu/>
-        <ItemsMenu/>
-        <button className="next-button">Next</button>
+        {/* <ItemsMenu/>
+        <button className="next-button">Next</button> */}
       </div>
     </div>
   );

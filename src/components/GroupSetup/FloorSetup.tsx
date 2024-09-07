@@ -2,7 +2,7 @@ import Elements, { ElementType, SetupElementType } from '../Elements/Elements';
 
 const floorSetup: ElementType[] = [
   {
-    style: { top: '65%', left: '30%', width: '150px', zIndex: '1' },
+    style: { top: '70%', left: '10%', width: '150px', zIndex: '1' },
     image: '/assets/Dog.png',
     name: 'Dog',
     description: 'A cute dog'

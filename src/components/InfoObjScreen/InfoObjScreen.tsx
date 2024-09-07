@@ -9,13 +9,11 @@ interface InfoObjScreenType {
 
 const InfoObjScreen = ({ onClose, objName, objDescription} : InfoObjScreenType) => {
   return (
-    <div className="info-screen">
-      <div className="info-content">
+      <div className="info-objContent">
         <h5>{objName}</h5>
         <p>{objDescription}</p>
         <button onClick={onClose}>close</button>
       </div>
-    </div>
   );
 };
 

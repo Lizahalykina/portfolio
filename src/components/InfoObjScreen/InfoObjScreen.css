@@ -9,11 +9,13 @@
 }
 
 .info-objContent h3 {
-    margin: 0 0 5px;
+    padding: 5px;
+    margin: 0px;
 }
 
 .info-objContent p {
-    margin: 0 0 10px;
+    padding: 5px 5px 10px 5px;
+    margin: 0px;
 }
 
 .info-objContent button {

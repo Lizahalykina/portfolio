@@ -1,5 +1,7 @@
 body {
-    font-family: 'Comic Neue', sans-serif;
+    font-family: 'Courier New',
+        Courier,
+        monospace;
 }
 
 .black-screen {

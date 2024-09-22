@@ -49,9 +49,8 @@ const TopMenu: React.FC = () => {
 
   return (
     <div className="top-menu-container">
-      <img src="/assets/TopMenu.png" alt="Top Menu" className="top-menu-background" />
       <div className="top-menu-items">
-        <span className="menu-item">{currentTime}</span>
+        <span className="menu-item-time">{currentTime}</span>
         <span className="menu-item" onClick={openCV}>CV</span>
         <span className="menu-item" onClick={openMyGitHub}>GitHub</span>
         <span className="menu-item" onClick={openNotion}>Notion</span>

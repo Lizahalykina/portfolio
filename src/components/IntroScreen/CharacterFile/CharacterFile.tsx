@@ -57,7 +57,7 @@ const CharacterFile: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         <div className="last-page">
           <div className="last-page-edge"></div>
           <div className="last-page-content">
-            <CaseFileInfo></CaseFileInfo>
+            <CaseFileInfo/>
           </div>
         </div>
         <div className="back-cover">

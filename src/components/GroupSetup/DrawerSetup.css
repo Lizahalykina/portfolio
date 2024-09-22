@@ -1,0 +1,7 @@
+.drawer {
+    transition: transform 0.3s ease-in;
+}
+
+.drawer:hover {
+    transform: translateX(-20px);
+}

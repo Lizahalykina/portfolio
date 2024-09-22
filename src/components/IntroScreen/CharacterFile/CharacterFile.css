@@ -192,6 +192,11 @@
     pointer-events: none;
 }
 
+.book.open {
+    transform: translate(55%, 0);
+    transition-duration: 4s;
+}
+
 .book.open .cover {
     transform: rotateX(10deg) rotateY(-180deg);
     transition-duration: 3s;

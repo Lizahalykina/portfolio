@@ -8,11 +8,11 @@ interface ActionCluesType {
 
 const actionClues: ActionCluesType[] = [
   {
-    clue: "Ah, I see you've made it here. Welcome! You’re about to take a closer look at a day in my life. But don’t just watch—there’s more hidden in this room than meets the eye. Each item tells a story about me and what I do. Your task is to find them all! Who knows what hidden skill you might uncover? Ready? Let’s begin!",
+    clue: "Take a closer look  — there’s more hidden here than you think. Each item tells a story. Can you find them all and uncover a hidden skill?",
   },
 ];
 
-const ActionMenu: React.FC = () => {
+const ActionMenu = () => {
   const elementRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const ActionMenu: React.FC = () => {
 
   return (
     <div className="action-menu-container">
-      <img src="/assets/TaskPicture.png" alt="Task Picture" className="task-picture" />
+      <img src="/assets/DogDetective.png" alt="Detective" className="detective" />
       <div className="action-task">
         <p ref={elementRef}></p> 
       </div>

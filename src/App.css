@@ -1,7 +1,5 @@
 body {
-    font-family: 'Courier New',
-        Courier,
-        monospace;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .black-screen {
@@ -10,9 +8,16 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     z-index: -1;
+}
+
+.screen-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .frame {
@@ -20,10 +25,7 @@ body {
     height: 600px;
     background: url('C:\Users\lizav\OneDrive\Desktop\React projects\portfolio\public\assets\Background.png') no-repeat center center;
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 0;
+    border-radius: 12px;
 }
 
 .app-container {

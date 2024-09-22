@@ -1,0 +1,212 @@
+.weather-window-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10%;
+    width: 400px;
+    height: 300px;
+    background: #f1f5f9;
+}
+
+.weather-select {
+    padding: 10px 20px;
+    border: none;
+    background: #e0e7ff;
+    color: #4f46e5;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    outline: none;
+    transition: background 0.3s ease-in-out;
+}
+
+.weather-select:hover {
+    background: #d4d4ff;
+}
+
+.weather-window {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sunny {
+    background: linear-gradient(to bottom, #fff1c9, #ffe4a3);
+}
+
+.sun {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #ffe066;
+    box-shadow: 0 0 30px rgba(255, 224, 102, 0.8);
+    animation: pulseSun 10s infinite;
+}
+
+@keyframes pulseSun {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(255, 224, 102, 0.8);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 60px rgba(255, 224, 102, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(255, 224, 102, 0.8);
+    }
+}
+
+.cloudy {
+    background: linear-gradient(to bottom, #e0e7ff, #a5b4fc);
+}
+
+.cloud {
+    width: 100px;
+    height: 50px;
+    background: #f8fafc;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation: floatClouds 15s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: #f8fafc;
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 80px;
+    height: 40px;
+    top: -20px;
+    left: 15px;
+}
+
+.cloud::after {
+    width: 60px;
+    height: 30px;
+    top: -10px;
+    left: -20px;
+}
+
+@keyframes floatClouds {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.rainy {
+    background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+}
+
+.rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(to bottom,
+            transparent,
+            transparent 5px,
+            rgba(173, 216, 230, 0.5) 5px,
+            rgba(173, 216, 230, 0.8) 10px);
+    animation: fallRain 2s linear infinite;
+}
+
+@keyframes fallRain {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.snowy {
+    background: linear-gradient(to bottom, #f0f7ff, #e0e4ff);
+}
+
+.snow {
+    width: 5px;
+    height: 5px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    animation: fallSnow 5s linear infinite;
+}
+
+@keyframes fallSnow {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.clearNight {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+}
+
+.moon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #f0f4f8;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+    position: relative;
+    animation: floatMoon 15s linear infinite;
+}
+
+.moon::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    background-color: #0f172a;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+}
+
+@keyframes floatMoon {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.cloudyNight {
+    background: linear-gradient(to bottom, #1e293b, #334155);
+}
+
+.rainyNight {
+    background: linear-gradient(to bottom, #273549, #364254);
+}
+
+.snowyNight {
+    background: linear-gradient(to bottom, #334155, #475569);
+}

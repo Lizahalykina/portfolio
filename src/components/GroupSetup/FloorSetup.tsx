@@ -6,8 +6,8 @@ const floorSetup: ElementType[] = [
     image: '/assets/Dog.png',
     name: 'Zuko',
     audio: '/assets/DogBark.mp3',
-    description: 'This is my toy poodle Zuko (Avatar the last airbender ref). He loves attention, older ladies, and older ladies attention. His groomer gives him a classic poodle cut, I find it hilarious.'
-  },
+      description: 'Zuko: Toy poodle. Field partner, expert distractor, and committed pigeon-spy hunter. Wears his poodle cut like official uniform.'
+    },
   {
     style: { top: '70%', left: '20%', width: '40px', zIndex: '1' },
     image: '/assets/Cube.png',

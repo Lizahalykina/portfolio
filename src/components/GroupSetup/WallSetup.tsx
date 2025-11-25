@@ -44,7 +44,7 @@ const wallElements: ElementType[] = [
     style: { top: '18%', left: '5%', width: '220px', zIndex: '1' }, 
     image: '/assets/FilmPoster.png', 
     name: 'Film Poster', 
-    description: 'Poster of the film I helped designed a few years ago. It is called The Dunns of Brixton, its on Amazon, feel free to check it out!' 
+    description: 'Film poster for The Dunns of Brixton. I designed, hand-drew, and animated the full visual package for the film—including the poster, title sequence, and all marketing materials. It’s available on Amazon if you’d like to take a look.' 
   },
   { 
     style: { top: '-4.4%', left: '0.5%', width: '240px', zIndex: '1' }, 

@@ -1,0 +1,36 @@
+.close-button {
+    position: absolute;
+    background-color: #c0c0c0;
+    color: black;
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    box-shadow: inset 1px 1px 0px #808080, inset -1px -1px 0px #fff;
+    user-select: none;
+}
+
+.close-button:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+}
+
+.close-button:active {
+    box-shadow: inset -1px -1px 0px #808080, inset 1px 1px 0px #fff;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+}
+
+.close-button:focus {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+}
+

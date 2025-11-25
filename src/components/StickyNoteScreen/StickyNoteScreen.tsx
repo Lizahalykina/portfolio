@@ -16,33 +16,31 @@ const StickyNoteScreen = ({ open }: StickyNoteScreenType) => {
   const [notes, setNotes] = useState<StickyNote[]>([
     {
       id: 1,
-      text: 'Common Git Commands:',
-      bullets: ['git status', 'git pull origin main', 'git checkout -b [branch-name]'],
+      text: 'Ship small, ship often.',
     },
     {
       id: 2,
-      text: '`===` not `==`! Because I don’t like surprises 🧐',
+      text: 'Don\'t trust "it works on my machine." Check local, staging, prod',
     },
     {
       id: 3,
-      text: 'Commit often, push even more often! 🐙 Don’t forget to pull first 😅',
+      text: 'Misaligned assumptions cost the most time. Validate with devs early',
     },
     {
       id: 4,
-      text: 'Take a deep breath. Things will work out 🌿',
+      text: 'Frontend, backend, AWS, deployment - if it touches your feature, understand it',
     },
     {
       id: 5,
-      text: 'JavaScript Array Methods:',
-      bullets: ['map()', 'filter()', 'reduce()'],
+      text: 'Keep code DRY (Don\'t Repeat Yourself)',
     },
     {
       id: 6,
-      text: 'Hydrate! Water won’t drink itself 💧',
+      text: 'When something feels "off" for your design-trained eye, investigate',
     },
     {
       id: 7,
-      text: 'Small progress is still progress. Keep going 🚀',
+      text: 'A 5-minute clarification prevents a 5-hour rewrite.',
     },
   ]);
   const [inputText, setInputText] = useState<string>('');
@@ -60,15 +58,16 @@ const StickyNoteScreen = ({ open }: StickyNoteScreenType) => {
 
     if (inputText.trim() === '') return;
 
-    const newNote: StickyNote = { id: Date.now(), text: inputText };
+    const noteText = inputText.trim();
+    const newNote: StickyNote = { id: Date.now(), text: noteText };
     setNotes([...notes, newNote]);
     setInputText('');
 
     try {
-      await fetch('http://localhost:5000/send-email', {
+      await fetch(process.env.REACT_APP_EMAIL_BACKEND_URL || '', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: inputText }),
+        body: JSON.stringify({ message: noteText }),
       });
 
       alert('Thanks for your note! It’s added to the board, and I’ll be notified!');
@@ -87,9 +86,7 @@ const StickyNoteScreen = ({ open }: StickyNoteScreenType) => {
               <div className="board-text">
                 <h3>Sticky Note Board</h3>
                 <h5>
-                  As a junior developer, I'm always learning. Visual aids like sticky notes have
-                  been really helpful in my process. For example, I use them to remember key coding
-                  concepts, track bugs, or note shortcuts I’m practicing.
+                A compact collection of quick operational reminders - small insights gathered from real projects, backend infiltrations, and cross-team missions. Just the essentials I keep on hand to stay aligned, efficient, and mission-ready.
                 </h5>
               </div>
               <div className="board">

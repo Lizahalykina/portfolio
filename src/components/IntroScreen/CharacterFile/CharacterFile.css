@@ -132,12 +132,51 @@
     transform: rotateX(10deg);
     transform-origin: center left;
     transition-duration: 3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    border-radius: 5px 25px 25px 5px
 }
-
 
 .page {
     z-index: 4;
     border-radius: 5px 25px 25px 5px;
+    transform-style: preserve-3d;
+}
+
+.page-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.page-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background: white;
+    border-radius: 25px 5px 5px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-back-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 .page-edge {
@@ -162,7 +201,6 @@
     position: relative;
     border-radius: 5px 25px 25px 5px;
     z-index: 2;
-    cursor: pointer;
 }
 
 .last-page-edge {
@@ -209,31 +247,12 @@
     z-index: 5;
 }
 
+
 .book.close {
     transform: rotateY(90deg);
 }
 
-.close-button {
-    position: absolute;
+.book-close-button {
     bottom: -60px;
     right: -60px;
-    background-color: #c0c0c0;
-    color: black;
-    font-size: 18px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 2px solid #fff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-    box-shadow: inset 1px 1px 0px #808080, inset -1px -1px 0px #fff;
-}
-
-
-.close-button:hover {
-    background-color: #e0e0e0;
-    border-color: #bbb;
 }

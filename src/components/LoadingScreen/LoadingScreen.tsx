@@ -8,7 +8,7 @@ const LoadingScreen: React.FC = () => {
         <div className="magnifying-glass">
           <span role="img" aria-label="magnifying glass">🔍</span>
         </div>
-        <h1>Loading Investigation...</h1>
+        <h1 className="typing-animation">Loading Investigation...</h1>
         <p className="loading-text">Uncovering clues, please wait...</p>
       </div>
     </div>

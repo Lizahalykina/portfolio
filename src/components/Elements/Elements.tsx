@@ -17,9 +17,10 @@ export interface ElementType {
 interface ElementsType {
   elements: ElementType[];
   style: SetupElementType;
+  onOpenStickyNoteScreen?: () => void;
 }
 
-const Elements = ({elements, style,} : ElementsType) => {
+const Elements = ({elements, style, onOpenStickyNoteScreen} : ElementsType) => {
 
   return (
     <div
@@ -37,6 +38,7 @@ const Elements = ({elements, style,} : ElementsType) => {
             audio={element.audio}
             element={element.element}
             classname={element.classname}
+            onOpenStickyNoteScreen={onOpenStickyNoteScreen}
           />
         </div>
       )}

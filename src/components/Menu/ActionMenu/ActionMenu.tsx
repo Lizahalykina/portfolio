@@ -8,19 +8,23 @@ interface ActionCluesType {
 
 const actionClues: ActionCluesType[] = [
   {
-    clue: "Take a closer look  — there’s more hidden here than you think. Each item tells a story. Can you find them all and uncover a hidden skill?",
+    clue: "Take a closer look  — there's more hidden here than you think. Each item tells a story. Can you find them all and uncover a hidden skill?",
   },
 ];
 
-const ActionMenu = () => {
+interface ActionMenuProps {
+  startAnimation?: boolean;
+}
+
+const ActionMenu: React.FC<ActionMenuProps> = ({ startAnimation = false }) => {
   const elementRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    if (elementRef.current) {
+    if (elementRef.current && startAnimation) {
       elementRef.current.innerHTML = '';
       typeWriterEffect(actionClues[0].clue, elementRef.current, 40);
     }
-  }, []);
+  }, [startAnimation]);
 
   return (
     <div className="action-menu-container">

@@ -4,7 +4,11 @@ import InfoObjScreen from '../../InfoObjScreen/InfoObjScreen';
 import React from 'react';
 import '../Elements.css';
 
-const Element = ({ image, style, name, description, audio, element, classname }: ElementType) => {
+interface ElementProps extends ElementType {
+  onOpenStickyNoteScreen?: () => void;
+}
+
+const Element = ({ image, style, name, description, audio, element, classname, onOpenStickyNoteScreen }: ElementProps) => {
   const [playing, setPlaying] = useState<HTMLAudioElement | null>(null);
   const [openElement, setOpenElement] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -88,7 +92,12 @@ const Element = ({ image, style, name, description, audio, element, classname }:
     }
     playAudio();
     if (element) {
-      setOpenElement(true);
+      // Check if this is the sticky note board and we have a callback
+      if (name === 'Sticky Notes' && onOpenStickyNoteScreen) {
+        onOpenStickyNoteScreen();
+      } else {
+        setOpenElement(true);
+      }
     } else {
       const rect = e.currentTarget.getBoundingClientRect();
       const frameElement = document.querySelector('.frame');

@@ -3,12 +3,11 @@ body {
 }
 
 .black-screen {
-    background-color: black;
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     z-index: -1;
 }
@@ -16,16 +15,29 @@ body {
 .screen-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 800px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, filter 1s ease-in-out, brightness 1s ease-in-out;
+}
+
+.screen-container.fade-in {
+    opacity: 1;
+}
+
+.screen-container.blurred-darkened {
+    filter: blur(4px) brightness(0.4);
 }
 
 .frame {
-    width: 1000px;
-    height: 600px;
-    background: url('C:\Users\lizav\OneDrive\Desktop\React projects\portfolio\public\assets\Background.png') no-repeat center center;
+    width: 800px;
+    height: 480px;
     background-size: cover;
     border-radius: 12px;
+    margin: 5px 0;
 }
 
 .app-container {

@@ -1,11 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './CharacterFile.css';
 import CaseFileInfo from '../CaseFileInfo/CaseFileInfo';
 import CloseButton from '../../Common/CloseButton/CloseButton';
 
 
 
-const CharacterFile: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface CharacterFileProps {
+  onClose: () => void;
+  isEntering?: boolean;
+}
+
+const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = false }) => {
   const [ isBookOpen, setIsBookOpen] = useState(false);
   const [ isConfidentialHidden, setIsConfidentialHidden] = useState(false);
   const [ isCoverContentHidden, setisCoverContentHidden] = useState(false);
@@ -22,6 +27,15 @@ const CharacterFile: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       setIsConfidentialHidden(true);
     }, 1400);
   };
+
+  useEffect(() => {
+    if (isEntering) {
+      const timer = setTimeout(() => {
+        handlePageFlip();
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isEntering]);
 
   const handlePageFlipEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
     if (e.target === pageRef.current && e.propertyName === 'transform') {
@@ -41,15 +55,15 @@ const CharacterFile: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   }
 
   return (
-    <div className={`case-screen ${isClosing ? 'closing' : ''}`}>
+    <div className={`case-screen ${isClosing ? 'closing' : ''} ${isEntering ? 'entering' : ''}`}>
     <div className="book-body">
       <div className={`book ${isBookOpen ? 'open' : ''}`}>
-        <div className="cover" onMouseEnter={handlePageFlip}>
+        <div className="cover">
           <div className="cover-edge"></div>
           <div className={`cover-content ${isCoverContentHidden ? 'hidden' : 'visible'}`}>
             <h1 className="cover-title">Confidential Candidate Dossier</h1>
             <p className="cover-description">
-            This case file holds the essentials—skills, background, and a few clues about the engineer running this operation. Hover to examine the details.
+            This case file holds the essentials—skills, background, and a few clues about the engineer running this operation. The file will open automatically.
             </p>
           </div>
         </div>

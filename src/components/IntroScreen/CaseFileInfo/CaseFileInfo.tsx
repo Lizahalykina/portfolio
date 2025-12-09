@@ -50,7 +50,7 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
   const [showContactForm, setShowContactForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'config-error'>('idle');
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
     // Debug: Check if access key is configured
     if (!accessKey) {
       console.error('Web3Forms Access Key not found! Please add REACT_APP_WEB3FORMS_ACCESS_KEY to your .env file');
-      setSubmitStatus('error');
+      setSubmitStatus('config-error');
       setIsSubmitting(false);
       return;
     }
@@ -301,11 +301,14 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
                       Message sent successfully! Email address copied to clipboard.
                     </div>
                   )}
+                  {submitStatus === 'config-error' && (
+                    <div className="form-error">
+                      Web3Forms not configured. Please add REACT_APP_WEB3FORMS_ACCESS_KEY to your .env file. Check console for details.
+                    </div>
+                  )}
                   {submitStatus === 'error' && (
                     <div className="form-error">
-                      {process.env.REACT_APP_WEB3FORMS_ACCESS_KEY 
-                        ? 'Failed to send message. Please check the console for details and try again.' 
-                        : 'Web3Forms not configured. Please add REACT_APP_WEB3FORMS_ACCESS_KEY to your .env file. Check console for details.'}
+                      Failed to send message. Please check the console for details and try again.
                     </div>
                   )}
                   <button type="submit" disabled={isSubmitting} className="form-submit-btn">

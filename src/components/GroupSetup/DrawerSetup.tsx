@@ -6,7 +6,7 @@ const drawerElement: ElementType[] = [
         style: { top: '69%', left: '80%', width: '144px', zIndex: '10' },
         image: '/assets/ArtSupplies.png',
         name: 'Art Supplies',
-        description: 'I do have an extensive background in arts and it is still an important part of my life. I host monthly Art events in London, and I am currently building them a website'
+        description: 'I do have an extensive background in arts and it is still an important part of my life. I used to host monthly Art tours in London, as well as masterclasses and live drawing events.'
     },
     {
         style: { top: '48%', left: '75%', width: '32px', zIndex: '10' },

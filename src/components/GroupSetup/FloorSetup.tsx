@@ -6,7 +6,7 @@ const floorSetup: ElementType[] = [
     image: '/assets/Dog.png',
     name: 'Zuko',
     audio: '/assets/DogBark.mp3',
-      description: 'Zuko: Toy poodle. Field partner, expert distractor, and committed pigeon-spy hunter. Wears his poodle cut like official uniform.'
+      description: 'Zuko: Toy poodle. Field partner, expert distractor, and committed pigeon hunter. Wears his poodle cut like official uniform.'
     },
   {
     style: { top: '70%', left: '20%', width: '32px', zIndex: '1' },

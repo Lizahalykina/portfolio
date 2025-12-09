@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import './CaseFileInfo.css';
 
 
@@ -18,9 +19,9 @@ interface DetectiveProfile {
 
 const profile: DetectiveProfile = {
     fullName: 'Liza Halykina',
-    alias: 'The Pixel Whisperer',
+    alias: 'The Frontend Operative',
     mugshot: '/assets/TaskPicture.png',
-    caseSummary: 'A skilled software engineer with a background in multimedia design and front-end development.',
+    caseSummary: 'Subject operates as a frontend engineer specialising in intuitive interfaces and seamless digital experiences. Evidence suggests a background in multimedia design combined with modern web technologies expertise.',
     knownCapabilities: ['JavaScript, TypeScript, React', 'HTML, CSS', 'UX/UI', 'Python', 'AWS Services', 'API Integration', 'Backend Development'],
     weaponsOfChoice: ['Git', 'Figma', 'Adobe Creative Suite', 'VS Code', 'React DevTools', 'AWS Console', 'Postman'],
     psychologicalProfile: ['Quick Learner', 'Creative Problem Solver', 'Proactive & Committed', 'Calm Under Pressure', 'Self-Directed'],
@@ -46,6 +47,76 @@ interface CaseFileInfoProps {
 }
 
 const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowContactForm(true);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    // Using Web3Forms 
+    // REACT_APP_WEB3FORMS_ACCESS_KEY to your .env file
+    
+    const accessKey = process.env.REACT_APP_WEB3FORMS_ACCESS_KEY;
+    
+    // Debug: Check if access key is configured
+    if (!accessKey) {
+      console.error('Web3Forms Access Key not found! Please add REACT_APP_WEB3FORMS_ACCESS_KEY to your .env file');
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+      return;
+    }
+    
+    try {
+      const formDataToSend = new FormData(e.currentTarget);
+      formDataToSend.append("access_key", accessKey);
+      formDataToSend.append("subject", "Portfolio Game Enquiry");
+
+      console.log('Sending form to Web3Forms...');
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+      console.log('Web3Forms response:', data);
+      
+      if (data.success) {
+        // Copy email to clipboard simultaneously
+        try {
+          await navigator.clipboard.writeText(profile.contactEmail);
+        } catch (clipboardError) {
+          console.warn('Failed to copy email to clipboard:', clipboardError);
+        }
+        
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => {
+          setShowContactForm(false);
+          setSubmitStatus('idle');
+        }, 2000);
+      } else {
+        // Show more detailed error from Web3Forms
+        const errorMessage = data.message || 'Failed to send message';
+        console.error('Web3Forms error:', errorMessage, data);
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const formatTrainingContent = (training: string) => {
     const experiences = training.split(/\n\s*\n/).filter(exp => exp.trim());
     
@@ -168,7 +239,8 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
             <h4>Contact Channels</h4>
             <p>
               <a 
-                href={`mailto:${profile.contactEmail}?subject=Portfolio Game Enquiry`}
+                href="#"
+                onClick={handleContactClick}
                 style={{ 
                   color: 'inherit', 
                   textDecoration: 'underline',
@@ -179,6 +251,71 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
               </a>
             </p>
           </div>
+
+          {showContactForm && createPortal(
+            <div className="contact-form-overlay" onClick={() => setShowContactForm(false)}>
+              <div className="contact-form-modal" onClick={(e) => e.stopPropagation()}>
+                <button 
+                  className="contact-form-close"
+                  onClick={() => setShowContactForm(false)}
+                >
+                  ×
+                </button>
+                <h3>Send a Message</h3>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="name">Your Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Your Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="message">Message</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      rows={5}
+                      required
+                    />
+                  </div>
+                  {submitStatus === 'success' && (
+                    <div className="form-success">
+                      Message sent successfully! Email address copied to clipboard.
+                    </div>
+                  )}
+                  {submitStatus === 'error' && (
+                    <div className="form-error">
+                      {process.env.REACT_APP_WEB3FORMS_ACCESS_KEY 
+                        ? 'Failed to send message. Please check the console for details and try again.' 
+                        : 'Web3Forms not configured. Please add REACT_APP_WEB3FORMS_ACCESS_KEY to your .env file. Check console for details.'}
+                    </div>
+                  )}
+                  <button type="submit" disabled={isSubmitting} className="form-submit-btn">
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </form>
+              </div>
+            </div>,
+            document.body
+          )}
         </>
       ) : (
         <>

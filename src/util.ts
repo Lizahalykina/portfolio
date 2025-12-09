@@ -1,15 +1,23 @@
-export function typeWriterEffect(text: string, element: HTMLElement, speed: number = 100) {
+export function typeWriterEffect(text: string, element: HTMLElement, speed: number = 100): () => void {
   let index = 0;
+  let timeoutId: NodeJS.Timeout | null = null;
   
   function type() {
     if (index < text.length) {
       element.innerHTML += text.charAt(index);
       index++;
-      setTimeout(type, speed);
+      timeoutId = setTimeout(type, speed);
     }
   }
   element.innerHTML = '';
   type();
+  
+  // Return cleanup function
+  return () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  };
 }
 
 // Preload all room images in the background

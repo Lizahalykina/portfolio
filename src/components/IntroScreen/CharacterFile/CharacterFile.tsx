@@ -10,12 +10,15 @@ interface CharacterFileProps {
   isEntering?: boolean;
 }
 
+const FULL_TEXT = "An engineer is missing…\n\nfrom your team.\n\nIntel suggests she can be found here.";
+
 const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = false }) => {
   const [ isBookOpen, setIsBookOpen] = useState(false);
   const [ isConfidentialHidden, setIsConfidentialHidden] = useState(false);
   const [ isCoverContentHidden, setisCoverContentHidden] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isFlipDone, setIsFlipDone] = useState(false);
+  const [typedText, setTypedText] = useState('');
   const pageRef = useRef<HTMLDivElement>(null);
 
   const handlePageFlip = () => {
@@ -28,11 +31,31 @@ const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = fal
     }, 1400);
   };
 
+  // Typing animation effect - completes before page flip (3000ms) and case file (4400ms)
+  useEffect(() => {
+    if (isEntering) {
+      setTypedText('');
+      let currentIndex = 0;
+      const typingSpeed = 30; // milliseconds per character - ensures completion before 3000ms
+      
+      const typingInterval = setInterval(() => {
+        if (currentIndex < FULL_TEXT.length) {
+          setTypedText(FULL_TEXT.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+        }
+      }, typingSpeed);
+
+      return () => clearInterval(typingInterval);
+    }
+  }, [isEntering]);
+
   useEffect(() => {
     if (isEntering) {
       const timer = setTimeout(() => {
         handlePageFlip();
-      }, 1500);
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [isEntering]);
@@ -63,7 +86,13 @@ const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = fal
           <div className={`cover-content ${isCoverContentHidden ? 'hidden' : 'visible'}`}>
             <h1 className="cover-title">Confidential Candidate Dossier</h1>
             <p className="cover-description">
-            This case file holds the essentials—skills, background, and a few clues about the engineer running this operation. The file will open automatically.
+              {typedText.split('\n').map((line, index, array) => (
+                <React.Fragment key={index}>
+                  {line}
+                  {index < array.length - 1 && <br />}
+                </React.Fragment>
+              ))}
+              {typedText.length < FULL_TEXT.length && <span className="typing-cursor">|</span>}
             </p>
           </div>
         </div>

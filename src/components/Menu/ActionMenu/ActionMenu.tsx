@@ -8,7 +8,7 @@ interface ActionCluesType {
 
 const actionClues: ActionCluesType[] = [
   {
-    clue: "Take a closer look  — there's more hidden here than you think. Each item tells a story. Can you find them all and uncover a hidden skill?",
+    clue: "Work in progress: Items show descriptions when clicked. Sticky Notes, Piano, and Zuko have extra features. More interactivity coming soon.",
   },
 ];
 
@@ -22,7 +22,8 @@ const ActionMenu: React.FC<ActionMenuProps> = ({ startAnimation = false }) => {
   useEffect(() => {
     if (elementRef.current && startAnimation) {
       elementRef.current.innerHTML = '';
-      typeWriterEffect(actionClues[0].clue, elementRef.current, 40);
+      const cleanup = typeWriterEffect(actionClues[0].clue, elementRef.current, 40);
+      return cleanup;
     }
   }, [startAnimation]);
 

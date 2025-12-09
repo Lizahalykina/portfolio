@@ -9,8 +9,10 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
   const [showCircle, setShowCircle] = useState(false);
   const [showPresents, setShowPresents] = useState(false);
   const [showText, setShowText] = useState(false);
+  const [showStartButton, setShowStartButton] = useState(false);
   const [showCopyright, setShowCopyright] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   useEffect(() => {
     // Show circle after a brief delay
@@ -26,6 +28,10 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
       setShowText(true);
     }, 2500);
 
+    const startButtonTimer = setTimeout(() => {
+      setShowStartButton(true);
+    }, 3500);
+
     const copyrightTimer = setTimeout(() => {
       setShowCopyright(true);
     }, 4000);
@@ -34,11 +40,14 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
       clearTimeout(circleTimer);
       clearTimeout(presentsTimer);
       clearTimeout(textTimer);
+      clearTimeout(startButtonTimer);
       clearTimeout(copyrightTimer);
     };
   }, []);
 
-  const handleClick = () => {
+  const handleStart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsButtonClicked(true);
     setIsClosing(true);
     setTimeout(() => {
       onComplete();
@@ -48,8 +57,6 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
   return (
     <div 
       className={`intro-screen ${isClosing ? 'closing' : ''}`}
-      onClick={handleClick}
-      style={{ cursor: 'pointer' }}
     >
       <div className={`intro-circle ${showCircle ? 'visible' : ''}`}></div>
       
@@ -62,6 +69,13 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
         <div className="intro-text-line">The <span className="curious-case">Curious Case</span> of a</div>
         <div className="intro-text-line intro-text-large">missing engineer</div>
       </div>
+      
+      <button 
+        className={`intro-start-button ${showStartButton ? 'visible' : ''} ${isButtonClicked ? 'clicked' : ''}`}
+        onClick={handleStart}
+      >
+        Start
+      </button>
       
       <div className={`intro-copyright ${showCopyright ? 'visible' : ''}`}>
         © 2025 Liza Halykina<br />

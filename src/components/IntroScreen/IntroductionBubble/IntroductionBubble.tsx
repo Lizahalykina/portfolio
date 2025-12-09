@@ -10,12 +10,13 @@ interface IntroductionBubbleProps {
 const IntroductionBubble: React.FC<IntroductionBubbleProps> = ({ onClose }) => {
   const textRef = useRef<HTMLParagraphElement>(null);
   // const introductionText = "Welcome to the Liza's Room! You can explore the room and interact with the items around you. see if you can find objects that might be related to different skills Liza has. Or click on the computer to see the projects she has worked on. Let's begin!";
-  const introductionText = "This portfolio is still under construction, but Liza is working hard on making sure this works perfectly soon. In the meantime, click around if you're interested to see some work in progress.";
+  const introductionText = "This portfolio is still under construction, but Liza is working hard on making sure this works perfectly. In the meantime, click around if you're interested in some work in progress.";
 
   useEffect(() => {
     if (textRef.current) {
       textRef.current.innerHTML = '';
-      typeWriterEffect(introductionText, textRef.current, 30);
+      const cleanup = typeWriterEffect(introductionText, textRef.current, 30);
+      return cleanup;
     }
   }, []);
 

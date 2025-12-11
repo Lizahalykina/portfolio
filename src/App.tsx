@@ -7,7 +7,8 @@ import DrawerSetup from './components/GroupSetup/DrawerSetup';
 import CharacterSetup from './components/GroupSetup/CharacterSetup';
 import WallSetup from './components/GroupSetup/WallSetup';
 import FloorSetup from './components/GroupSetup/FloorSetup';
-import CharacterFile from './components/IntroScreen/CharacterFile/CharacterFile';
+import CaseFile from './components/IntroScreen/CaseFile/CaseFile';
+import DetectiveDesk from './components/IntroScreen/DetectiveDesk/DetectiveDesk';
 import IntroductionBubble from './components/IntroScreen/IntroductionBubble/IntroductionBubble';
 import WeatherWindow from './components/WeatherWindow/WeatherWindow';
 import StickyNoteScreen from './components/StickyNoteScreen/StickyNoteScreen';
@@ -22,8 +23,8 @@ const App = () => {
   const [showIntroScreen, setShowIntroScreen] = useState(true);
   const [startActionAnimation, setStartActionAnimation] = useState(false);
   const [showStickyNoteScreen, setShowStickyNoteScreen] = useState(false);
-  const [showCharacterFile, setShowCharacterFile] = useState(false);
-  const [characterFileEntering, setCharacterFileEntering] = useState(false);
+  const [showCaseFile, setShowCaseFile] = useState(false);
+  const [caseFileEntering, setCaseFileEntering] = useState(false);
   const [roomFadeIn, setRoomFadeIn] = useState(false);
 
   useEffect(() => {
@@ -34,15 +35,15 @@ const App = () => {
   const handleIntroScreenComplete = () => {
     // This is called after the fade out animation completes
     setShowIntroScreen(false);
-    // Show character file and start room fade-in after intro completes
-    setShowCharacterFile(true);
-    setCharacterFileEntering(true);
+    // Show case file and start room fade-in after intro completes
+    setShowCaseFile(true);
+    setCaseFileEntering(true);
     setRoomFadeIn(true);
   };
 
   const handleIntroClose = () => {
     setShowIntro(false);
-    setShowCharacterFile(false);
+    setShowCaseFile(false);
     // Room is already visible, just remove blur/darkening
     setShowIntroductionBubble(true);
   };
@@ -58,15 +59,25 @@ const App = () => {
 
   return (
     <>
+      {/* Floating under construction text - appears on all pages */}
+      <div className="global-under-construction">
+        This game is currently under construction
+      </div>
       {showIntroScreen && <IntroScreen onComplete={handleIntroScreenComplete} />}
       <div className="black-screen" style={{ display: showIntroScreen ? 'none' : 'flex' }}>
         {showStickyNoteScreen ? (
           <StickyNoteScreen open={true} onClose={handleStickyNoteScreenClose} />
         ) : (
           <>
-            {(showCharacterFile || showIntro) && <CharacterFile onClose={handleIntroClose} isEntering={characterFileEntering} />}
+            {(showCaseFile || showIntro) && (
+              <DetectiveDesk>
+                <CaseFile onClose={handleIntroClose} isEntering={caseFileEntering} />
+              </DetectiveDesk>
+            )}
+            {!showCaseFile && !showIntro && (
+              <>
             {showIntroductionBubble && <IntroductionBubble onClose={handleBubbleClose} />}
-            <div className={`screen-container ${roomFadeIn ? 'fade-in' : ''} ${(showCharacterFile || showIntro) ? 'blurred-darkened' : ''}`}>
+                <div className={`screen-container ${roomFadeIn ? 'fade-in' : ''}`}>
               <TopMenu />
               <div className="frame" style={{ backgroundImage: `url('/assets/Background.png')`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }}>
                 <div className="app-container">
@@ -79,6 +90,8 @@ const App = () => {
               </div>
               <BottomMenu startActionAnimation={startActionAnimation} />
             </div>
+              </>
+            )}
           </>
         )}
       </div>

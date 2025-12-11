@@ -5,7 +5,6 @@ import './CaseFileInfo.css';
 
 interface DetectiveProfile {
   fullName: string;
-  alias: string;
   mugshot: string;
   caseSummary: string;
   knownCapabilities: string[];
@@ -19,7 +18,6 @@ interface DetectiveProfile {
 
 const profile: DetectiveProfile = {
     fullName: 'Liza Halykina',
-    alias: 'The Frontend Operative',
     mugshot: '/assets/TaskPicture.png',
     caseSummary: 'Subject operates as a frontend engineer specialising in intuitive interfaces and seamless digital experiences. Evidence suggests a background in multimedia design combined with modern web technologies expertise.',
     knownCapabilities: ['JavaScript, TypeScript, React', 'HTML, CSS', 'UX/UI', 'Python', 'AWS Services', 'API Integration', 'Backend Development'],
@@ -146,14 +144,14 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
       // Title line (contains "—")
       if (line.includes('—')) {
         formatted.push(
-          <div key={i} style={{ marginBottom: '10px', fontWeight: 'bold', fontSize: '13px' }}>
+          <div key={i} style={{ marginBottom: '7.857px', fontWeight: 'bold', fontSize: '11.058px' }}>
             {line}
           </div>
         );
       }
       else if (line === 'Objective:' || line === 'Key Actions:' || line === 'Outcome:') {
         formatted.push(
-          <div key={i} style={{ marginTop: '10px', marginBottom: '5px', fontWeight: 'bold' }}>
+          <div key={i} style={{ marginTop: '7.857px', marginBottom: '4.365px', fontWeight: 'bold' }}>
             {line}
           </div>
         );
@@ -162,7 +160,7 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
         const [label, value] = line.split(':').map(s => s.trim());
         if (value) {
           formatted.push(
-            <div key={i} style={{ marginBottom: '5px' }}>
+            <div key={i} style={{ marginBottom: '4.365px' }}>
               <strong>{label}:</strong> {value}
             </div>
           );
@@ -171,7 +169,7 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
       // Bullet points
       else if (line.startsWith('•')) {
         formatted.push(
-          <div key={i} style={{ marginBottom: '5px', paddingLeft: '1rem' }}>
+          <div key={i} style={{ marginBottom: '4.365px', paddingLeft: '0.7857rem' }}>
             {line}
           </div>
         );
@@ -179,7 +177,7 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
       // Regular text
       else if (line) {
         formatted.push(
-          <div key={i} style={{ marginBottom: '5px' }}>
+          <div key={i} style={{ marginBottom: '4.365px' }}>
             {line}
           </div>
         );
@@ -196,15 +194,14 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
           <div className="case-main">
               <div className="case-heading">
                   <h2>{profile.fullName}</h2>
-                  <h4>Alias: {profile.alias}</h4>
               </div>
 
               <div className='case-summary-and-pic'>
-                  <img src={profile.mugshot} alt={`${profile.fullName} Mugshot`} className="mugshot" />
               <div className="case-summary">
                   <h4>Case Summary</h4>
                   <p>{profile.caseSummary}</p>
               </div>
+                  <img src={profile.mugshot} alt={`${profile.fullName} Mugshot`} className="mugshot" />
               </div>
           </div>
           
@@ -235,22 +232,9 @@ const CaseFileInfo: React.FC<CaseFileInfoProps> = ({ page = 1 }) => {
               </div>
           </div>
 
-          <div className="contact-channels">
-            <h4>Contact Channels</h4>
-            <p>
-              <a 
-                href="#"
-                onClick={handleContactClick}
-                style={{ 
-                  color: 'inherit', 
-                  textDecoration: 'underline',
-                  cursor: 'pointer'
-                }}
-              >
-                Click here to contact by email
-              </a>
-            </p>
-          </div>
+          <button className="contact-channels" onClick={handleContactClick}>
+            Contact Channels
+          </button>
 
           {showContactForm && createPortal(
             <div className="contact-form-overlay" onClick={() => setShowContactForm(false)}>

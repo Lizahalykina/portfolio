@@ -1,24 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './CharacterFile.css';
+import './CaseFile.css';
 import CaseFileInfo from '../CaseFileInfo/CaseFileInfo';
 import CloseButton from '../../Common/CloseButton/CloseButton';
 
 
 
-interface CharacterFileProps {
+interface CaseFileProps {
   onClose: () => void;
   isEntering?: boolean;
 }
 
-const FULL_TEXT = "An engineer is missing…\n\nfrom your team.\n\nIntel suggests she can be found here.";
-
-const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = false }) => {
+const FULL_TEXT = "Case File:\nFrontend Engineer\n\nSubject available\nfor recruitment.\n\nReview dossier \nfor details.";
+const CaseFile: React.FC<CaseFileProps> = ({ onClose, isEntering = false }) => {
   const [ isBookOpen, setIsBookOpen] = useState(false);
   const [ isConfidentialHidden, setIsConfidentialHidden] = useState(false);
   const [ isCoverContentHidden, setisCoverContentHidden] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isFlipDone, setIsFlipDone] = useState(false);
-  const [typedText, setTypedText] = useState('');
   const pageRef = useRef<HTMLDivElement>(null);
 
   const handlePageFlip = () => {
@@ -30,26 +28,6 @@ const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = fal
       setIsConfidentialHidden(true);
     }, 1400);
   };
-
-  // Typing animation effect - completes before page flip (3000ms) and case file (4400ms)
-  useEffect(() => {
-    if (isEntering) {
-      setTypedText('');
-      let currentIndex = 0;
-      const typingSpeed = 30; // milliseconds per character - ensures completion before 3000ms
-      
-      const typingInterval = setInterval(() => {
-        if (currentIndex < FULL_TEXT.length) {
-          setTypedText(FULL_TEXT.slice(0, currentIndex + 1));
-          currentIndex++;
-        } else {
-          clearInterval(typingInterval);
-        }
-      }, typingSpeed);
-
-      return () => clearInterval(typingInterval);
-    }
-  }, [isEntering]);
 
   useEffect(() => {
     if (isEntering) {
@@ -86,13 +64,12 @@ const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = fal
           <div className={`cover-content ${isCoverContentHidden ? 'hidden' : 'visible'}`}>
             <h1 className="cover-title">Confidential Candidate Dossier</h1>
             <p className="cover-description">
-              {typedText.split('\n').map((line, index, array) => (
+              {FULL_TEXT.split('\n').map((line, index, array) => (
                 <React.Fragment key={index}>
                   {line}
                   {index < array.length - 1 && <br />}
                 </React.Fragment>
               ))}
-              {typedText.length < FULL_TEXT.length && <span className="typing-cursor">|</span>}
             </p>
           </div>
         </div>
@@ -111,7 +88,7 @@ const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = fal
               />
             </div>
             <div className="page-back">
-              {isConfidentialHidden && (
+              {(isConfidentialHidden || isClosing) && (
                 <div 
                   className="page-back-content"
                   style={{
@@ -142,4 +119,5 @@ const CharacterFile: React.FC<CharacterFileProps> = ({ onClose, isEntering = fal
   );
 };
 
-export default CharacterFile;
+export default CaseFile;
+

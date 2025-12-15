@@ -183,10 +183,10 @@ const Element = ({ image, style, name, description, audio, element, classname, o
         alt={image} 
         style={{ 
           width: style.width,
-          cursor: `url('/assets/MagnifyingGlass.png') 16 16, pointer`,
-          pointerEvents: 'auto'
+          cursor: ((description && description.trim()) || element) ? `url('/assets/MagnifyingGlass.png') 16 16, pointer` : 'default',
+          pointerEvents: ((description && description.trim()) || element) ? 'auto' : 'none'
         }} 
-        onClick={openInfoScreen} 
+        onClick={((description && description.trim()) || element) ? openInfoScreen : undefined} 
         className="clickable-object" 
       />
       

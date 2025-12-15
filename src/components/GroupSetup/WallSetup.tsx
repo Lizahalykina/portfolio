@@ -11,51 +11,51 @@ const WallSetup = ({ onOpenStickyNoteScreen }: WallSetupProps) => {
       style: { top: '2%', left: '72%', width: '200px', zIndex: '1' }, 
       image: '/assets/ShelfDecor.png', 
       name: 'Shelf', 
-      description: 'shelf' 
+      description: 'Where I keep things organized' 
     },
     { 
       style: { top: '38%', left: '60%', width: '280px', zIndex: '0' }, 
       image: '/assets/Cabinet.png', 
       name: 'Cabinet', 
-      description: 'Cabinet' 
+      description: 'More storage space' 
     },
     { 
       style: { top: '5%', left: '62%', width: '64px', zIndex: '1' }, 
       image: '/assets/Calendar.png', 
       name: 'Calendar', 
-      description: 'Calendar represents how organised I am' 
+      description: 'Helps me keep track of deadlines and meetings' 
     },
     { 
       style: { top: '16%', left: '62%', width: '52px', zIndex: '10' }, 
       image: '/assets/StickyNotes.png', 
       name: 'Sticky Notes', 
       element: <StickyNoteScreen open={false} />,
-      description: 'I am in a constant learning mode. Visual aids like sticky notes helped a lot with my process' 
+      description: 'Visual reminders help when information doesn\'t stick. Click to see my collection of silly mistakes and tips.' 
     },
     {
       style: { top: '28.5%', left: '5%', width: '32px', zIndex: '9' },
       image: '/assets/LavaLamp.png',
       name: 'Lava Lamp',
-      description: 'Lava Lamp'
+      description: 'Good for focus sessions. The movement is oddly calming.'
     },
     { 
       style: { top: '39%', left: '0%', width: '224px', zIndex: '1' }, 
       image: '/assets/Piano.png', 
       name: 'Piano', 
       audio: '/assets/PianoLoop.mp3',
-      description: 'piano' 
+      description: 'Spent years playing piano, but these days the computer keyboard gets more attention.' 
     },
     { 
       style: { top: '18%', left: '5%', width: '176px', zIndex: '1' }, 
       image: '/assets/FilmPoster.png', 
       name: 'Film Poster', 
-      description: 'Film poster for The Dunns of Brixton. I designed, hand-drew, and animated the full visual package for the film—including the poster, title sequence, and all marketing materials. It\'s available on Amazon if you\'d like to take a look.' 
+      description: 'Poster for The Dunns of Brixton. I designed, hand-drew, and animated the full visual package—poster, title sequence, and all marketing materials. Available on Amazon if you\'re curious.' 
     },
     { 
       style: { top: '-4.4%', left: '0.5%', width: '192px', zIndex: '1' }, 
       image: '/assets/Bookshelf.png', 
       name: 'Bookshelf', 
-      description: 'bookshelf' 
+      description: 'Mix of design books, coding references, science-fiction, and politics' 
     }
   ];
 

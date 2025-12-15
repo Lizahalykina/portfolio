@@ -12,19 +12,19 @@ const floorSetup: ElementType[] = [
     style: { top: '70%', left: '20%', width: '32px', zIndex: '1' },
     image: '/assets/Cube.png',
     name: 'Rubiks Cube',
-    description: 'This is supposed to show my problem-solving skills, but ironically, I never actually tried to solve the cube'
+    description: 'I like breaking down complex problems into smaller steps. Still working on solving this one though.'
   },
   {
     style: { top: '90%', left: '65%', width: '32px', zIndex: '1' },
     image: '/assets/MagnifyingGlass.png',
     name: 'Magnifying Glass',
-    description: 'This one should sigfnify my attention to detail in everything I do'
+    description: 'Useful for spotting those tiny bugs that take hours to find'
   },
   {
     style: { top: '69%', left: '-5%', width: '280px', zIndex: '1' },
     image: '/assets/Plant.png',
     name: 'Chinese Money Plant',
-    description: 'The only plant that I managed to keep alive'
+    description: 'One of the few plants I\'ve managed to keep alive. Turns out consistency helps with plants too.'
   }
 ];
 

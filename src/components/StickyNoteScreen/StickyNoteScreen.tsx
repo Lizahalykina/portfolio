@@ -17,31 +17,31 @@ const StickyNoteScreen = ({ open, onClose }: StickyNoteScreenType) => {
   const [notes, setNotes] = useState<StickyNote[]>([
     {
       id: 1,
-      text: 'Ship small, ship often.',
+      text: 'AWS EC2: You stopped the instance to save costs. You also stopped remembering where you put the key pair. Keep it somewhere findable.',
     },
     {
       id: 2,
-      text: 'Don\'t trust "it works on my machine." Check local, staging, prod',
+      text: 'Git: "git push --force" is fine... until it\'s not. Your future self will thank you for checking the branch.',
     },
     {
       id: 3,
-      text: 'Misaligned assumptions cost the most time. Validate with devs early',
+      text: 'React: useEffect missing dependencies? The linter is right. Add them or explain why not. Your future debugging session depends on it.',
     },
     {
       id: 4,
-      text: 'Frontend, backend, AWS, deployment - if it touches your feature, understand it',
+      text: 'Docker: That container running locally? It\'s using cached layers from 3 months ago. docker-compose down --volumes is your friend.',
     },
     {
       id: 5,
-      text: 'Keep code DRY (Don\'t Repeat Yourself)',
+      text: 'TypeScript: "as any" fixes the error. It also fixes your type safety. Use sparingly.',
     },
     {
       id: 6,
-      text: 'When something feels "off" for your design-trained eye, investigate',
+      text: 'Vercel/Netlify: Deployed to production? Check if env vars are actually set. They\'re not in your .env.local.',
     },
     {
       id: 7,
-      text: 'A 5-minute clarification prevents a 5-hour rewrite.',
+      text: 'CSS: That z-index: 9999? There\'s probably a better way. But sometimes you just need it to work.',
     },
   ]);
   const [inputText, setInputText] = useState<string>('');
@@ -276,7 +276,7 @@ const StickyNoteScreen = ({ open, onClose }: StickyNoteScreenType) => {
           <div className="board-text">
             <h3>Sticky Note Board</h3>
             <h5>
-            A compact collection of quick operational reminders - small insights gathered from real projects, backend infiltrations, and cross-team missions. Just the essentials I keep on hand to stay aligned, efficient, and mission-ready.
+            Sometimes information just doesn't stick in your brain, no matter how many times you hear it. That's when a visual reminder helps. These are some notes I keep around - not exact quotes, but the gist of things I've learned along the way. What's your latest silly mistake? Add a tip below - learning together is better.
             </h5>
           </div>
           <div className="board">
@@ -319,7 +319,7 @@ const StickyNoteScreen = ({ open, onClose }: StickyNoteScreenType) => {
                 setInputText(text);
               }
             }}
-            placeholder={`Got a suggestion or a tip for me? Send it here! (max ${MAX_NOTE_LENGTH} chars)`}
+            placeholder={`Share your latest silly mistake tip! (max ${MAX_NOTE_LENGTH} chars)`}
             maxLength={MAX_NOTE_LENGTH}
           />
           <button type="submit">Add a Note</button>

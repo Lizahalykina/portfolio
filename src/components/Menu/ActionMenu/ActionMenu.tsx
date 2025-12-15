@@ -8,7 +8,7 @@ interface ActionCluesType {
 
 const actionClues: ActionCluesType[] = [
   {
-    clue: "Work in progress: Items show descriptions when clicked. Sticky Notes, Piano, and Zuko have extra features. More interactivity coming soon.",
+    clue: "Click items around the room to get insights. The Sticky Notes board and Computer screen have additional interactive functions - check them out!",
   },
 ];
 

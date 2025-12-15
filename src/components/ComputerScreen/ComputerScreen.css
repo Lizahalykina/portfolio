@@ -47,7 +47,7 @@
   position: relative;
   width: 90vw;
   max-width: 1800px;
-  aspect-ratio: 32 / 9; /* 49-inch ultrawide monitor aspect ratio */
+  aspect-ratio: 32 / 9.45; /* 5% taller than original 32:9 */
 }
 
 .monitor-screen {
@@ -89,12 +89,386 @@
   position: relative;
   width: calc(100% - 28px);
   height: calc(100% - 28px);
-  background: #0a0a0a;
-  border-radius: 20px 20px 20px 20px;
+  background: #C0C0C0;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(0, 0, 0, 0.02) 1px,
+      rgba(0, 0, 0, 0.02) 2px
+    );
   z-index: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px;
+  gap: 15px;
+  overflow: visible;
+  border: 2px inset #C0C0C0;
+}
+
+.terminal-icon {
+  width: 70px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: none;
+}
+
+.terminal-icon:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px dotted #000000;
+}
+
+.terminal-icon:active {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #000000;
+}
+
+.terminal-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border: 1px solid #000000;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 4px;
+  box-shadow: 
+    1px 1px 0 #FFFFFF inset,
+    -1px -1px 0 #808080 inset;
+}
+
+.terminal-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #000000;
+}
+
+.terminal-icon-label {
+  font-family: 'MS Sans Serif', 'Segoe UI', sans-serif;
+  font-size: 11px;
+  color: #000000;
+  text-align: center;
+  word-break: break-word;
+  max-width: 70px;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.notebook-icon {
+  width: 70px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: none;
+}
+
+.notebook-icon:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px dotted #000000;
+}
+
+.notebook-icon:active {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #000000;
+}
+
+.notebook-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  box-shadow: 
+    1px 1px 0 #FFFFFF inset,
+    -1px -1px 0 #808080 inset;
+}
+
+.notebook-icon-text {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.notebook-icon-label {
+  font-family: 'MS Sans Serif', 'Segoe UI', sans-serif;
+  font-size: 11px;
+  color: #000000;
+  text-align: center;
+  word-break: break-word;
+  max-width: 70px;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.computer-screen.focused::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.05);
+  pointer-events: none;
+  z-index: 9;
+  transition: opacity 120ms ease;
+}
+
+.terminal-window {
+  position: absolute;
+  background: #f5f5f5;
+  border: 1px solid #000000;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  overflow: hidden;
+  outline: none;
+}
+
+.terminal-window.boot-flicker {
+  animation: flicker 50ms;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+}
+
+.terminal-window::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.terminal-header {
+  background: #c0c0c0;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  position: relative;
+  z-index: 2;
+  cursor: move;
+  user-select: none;
+}
+
+.terminal-header-top,
+.terminal-header-bottom {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1;
+  color: #000000;
+  padding: 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.terminal-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+  min-height: 18px;
+}
+
+.terminal-title {
+  color: #000000;
+  font-size: 11px;
+  font-weight: normal;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  letter-spacing: 0.3px;
+  margin-left: 2px;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.terminal-minimize,
+.terminal-maximize,
+.terminal-close {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border: 1px solid #808080;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  font-size: 10px;
+  color: #000000;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 100ms ease;
+}
+
+.terminal-minimize:active,
+.terminal-maximize:active,
+.terminal-close:active {
+  border-top-color: #808080;
+  border-left-color: #808080;
+  border-bottom-color: #ffffff;
+  border-right-color: #ffffff;
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 6px 8px;
+  overflow-y: auto;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: 12px;
+  color: #2a2a2a;
+  background: #f5f5f5;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 12px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: #e8e8e8;
+  border-left: 1px solid #000000;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px solid #808080;
+  border-top-color: #ffffff;
+  border-left-color: #ffffff;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.terminal-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(0, 0, 0, 0.01) 1px,
+      rgba(0, 0, 0, 0.01) 2px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.terminal-line {
+  margin: 1px 0;
+  white-space: pre-wrap;
+  position: relative;
+  z-index: 1;
+  color: #2a2a2a;
+}
+
+.terminal-line-command {
+  color: #1a1a1a;
+}
+
+.terminal-prompt {
+  color: #1a1a1a;
+  margin-right: 4px;
+  font-weight: normal;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #1a1a1a;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  font-size: 12px;
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.terminal-cursor {
+  color: #1a1a1a;
+  background: #1a1a1a;
+  display: inline-block;
+  width: 1ch;
+  animation: blink 1.2s infinite;
+  margin-left: 2px;
+  font-weight: normal;
+}
+
+@keyframes blink {
+  0%, 45% { opacity: 1; }
+  46%, 100% { opacity: 0; }
+}
+
+.terminal-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  z-index: 3;
+  background: linear-gradient(
+    -45deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.1) 45%,
+    transparent 45%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.1) 55%,
+    rgba(0, 0, 0, 0.1) 60%,
+    transparent 60%
+  );
 }
 
 /* Monitor stand */
@@ -129,6 +503,130 @@
   z-index: 10001;
 }
 
+.notebook-window {
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  overflow: hidden;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.notebook-header {
+  background: #c0c0c0;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  position: relative;
+  z-index: 2;
+  cursor: move;
+  user-select: none;
+}
+
+.notebook-header-top,
+.notebook-header-bottom {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1;
+  color: #000000;
+  padding: 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notebook-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px;
+  min-height: 18px;
+}
+
+.notebook-title {
+  color: #000000;
+  font-size: 11px;
+  font-weight: normal;
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  letter-spacing: 0.3px;
+  margin-left: 2px;
+}
+
+.notebook-controls {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.notebook-minimize,
+.notebook-maximize,
+.notebook-close {
+  width: 16px;
+  height: 14px;
+  border: 1px solid #000000;
+  background: #c0c0c0;
+  color: #000000;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  padding: 0;
+  line-height: 1;
+}
+
+.notebook-minimize:hover,
+.notebook-maximize:hover {
+  background: #d4d4d4;
+}
+
+.notebook-close:hover {
+  background: #ff0000;
+  color: #ffffff;
+}
+
+.notebook-close:active {
+  background: #cc0000;
+}
+
+.notebook-body {
+  flex: 1;
+  background: #ffffff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #000000;
+}
+
+.notebook-content {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #000000;
+}
+
+.notebook-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 0%, transparent 40%, #808080 40%, #808080 45%, transparent 45%, transparent 55%, #808080 55%, #808080 60%, transparent 60%, transparent 100%);
+  z-index: 3;
+}
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 1920px) {
   .monitor-frame {
@@ -138,15 +636,14 @@
 
 @media (max-width: 1440px) {
   .monitor-frame {
-    width: 95vw;
-    aspect-ratio: 21 / 9;
+    width: 85vw;
   }
 }
 
 @media (max-width: 1024px) {
   .monitor-frame {
-    width: 98vw;
-    aspect-ratio: 16 / 9;
+    width: 95vw;
+    aspect-ratio: 21 / 9.45; /* 5% taller than original 21:9 */
   }
   
   .monitor-stand {

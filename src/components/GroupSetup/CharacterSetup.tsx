@@ -17,7 +17,7 @@ const characterElements: ElementType[] = [
     style: { top: '42%', left: '55%', width: '280px', zIndex: '2' },
     image: '/assets/Desk.png',
     name: 'Desk',
-    description: 'A standard desk'
+    description: ''
   },
 ];
 

@@ -85,9 +85,47 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
     }, 1000); // Match the fade out animation duration
   };
 
+  const handleScreenClick = (e: React.MouseEvent) => {
+    // Don't skip if clicking on the button or its children
+    const target = e.target as HTMLElement;
+    if (target.closest('.intro-start-button')) {
+      return;
+    }
+
+    // Skip initial text typing animation - show all parts immediately
+    if (!showInitialTextPart1 || !showInitialTextPart2 || !showInitialTextPart3) {
+      setShowInitialTextPart1(true);
+      setShowInitialTextPart2(true);
+      setShowInitialTextPart3(true);
+      return;
+    }
+
+    // If initial text is shown but main content hasn't started, start it immediately with all elements
+    if (!showMainContent) {
+      setHideInitialText(true);
+      setShowMainContent(true);
+      setShowCircle(true);
+      setShowPresents(true);
+      setShowText(true);
+      setShowStartButton(true);
+      setShowCopyright(true);
+      return;
+    }
+
+    // Skip main content staggered animations - show all elements at once
+    if (showMainContent && (!showCircle || !showPresents || !showText || !showStartButton || !showCopyright)) {
+      setShowCircle(true);
+      setShowPresents(true);
+      setShowText(true);
+      setShowStartButton(true);
+      setShowCopyright(true);
+    }
+  };
+
   return (
     <div 
       className={`intro-screen ${isClosing ? 'closing' : ''}`}
+      onClick={handleScreenClick}
     >
       {/* Initial text that appears first on black screen */}
       <div className={`intro-initial-text ${hideInitialText ? 'hidden' : ''}`}>

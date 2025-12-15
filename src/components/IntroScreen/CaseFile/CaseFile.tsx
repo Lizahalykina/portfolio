@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './CaseFile.css';
 import CaseFileInfo from '../CaseFileInfo/CaseFileInfo';
 import CloseButton from '../../Common/CloseButton/CloseButton';
@@ -17,9 +17,12 @@ const CaseFile: React.FC<CaseFileProps> = ({ onClose, isEntering = false }) => {
   const [ isCoverContentHidden, setisCoverContentHidden] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isFlipDone, setIsFlipDone] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
 
   const handlePageFlip = () => {
+    if (hasStarted) return; // Prevent multiple starts
+    setHasStarted(true);
     setIsBookOpen(true);
     setTimeout(() => {
         setisCoverContentHidden(true);
@@ -29,14 +32,13 @@ const CaseFile: React.FC<CaseFileProps> = ({ onClose, isEntering = false }) => {
     }, 1400);
   };
 
-  useEffect(() => {
-    if (isEntering) {
-      const timer = setTimeout(() => {
-        handlePageFlip();
-      }, 4000);
-      return () => clearTimeout(timer);
+  const handleCaseFileClick = (e: React.MouseEvent) => {
+    // Don't start if clicking on the close button or if already started
+    if (hasStarted || (e.target as HTMLElement).closest('.book-close-button')) {
+      return;
     }
-  }, [isEntering]);
+    handlePageFlip();
+  };
 
   const handlePageFlipEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
     if (e.target === pageRef.current && e.propertyName === 'transform') {
@@ -56,7 +58,11 @@ const CaseFile: React.FC<CaseFileProps> = ({ onClose, isEntering = false }) => {
   }
 
   return (
-    <div className={`case-screen ${isClosing ? 'closing' : ''} ${isEntering ? 'entering' : ''}`}>
+    <div 
+      className={`case-screen ${isClosing ? 'closing' : ''} ${isEntering ? 'entering' : ''}`}
+      onClick={handleCaseFileClick}
+      style={{ cursor: hasStarted ? 'default' : 'pointer' }}
+    >
     <div className="book-body">
       <div className={`book ${isBookOpen ? 'open' : ''}`}>
         <div className="cover">

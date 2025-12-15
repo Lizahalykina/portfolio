@@ -6,9 +6,10 @@ import '../Elements.css';
 
 interface ElementProps extends ElementType {
   onOpenStickyNoteScreen?: () => void;
+  onOpenComputerScreen?: () => void;
 }
 
-const Element = ({ image, style, name, description, audio, element, classname, onOpenStickyNoteScreen }: ElementProps) => {
+const Element = ({ image, style, name, description, audio, element, classname, onOpenStickyNoteScreen, onOpenComputerScreen }: ElementProps) => {
   const [playing, setPlaying] = useState<HTMLAudioElement | null>(null);
   const [openElement, setOpenElement] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -98,6 +99,9 @@ const Element = ({ image, style, name, description, audio, element, classname, o
       } else {
         setOpenElement(true);
       }
+    } else if (name === 'Computer screen' && onOpenComputerScreen) {
+      // Open computer screen instead of showing description
+      onOpenComputerScreen();
     } else {
       const rect = e.currentTarget.getBoundingClientRect();
       const frameElement = document.querySelector('.frame');

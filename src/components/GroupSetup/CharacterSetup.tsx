@@ -21,12 +21,15 @@ const characterElements: ElementType[] = [
   },
 ];
 
+interface CharacterSetupProps {
+  onOpenComputerScreen?: () => void;
+}
 
-const CharacterSetup = () => {
+const CharacterSetup = ({ onOpenComputerScreen }: CharacterSetupProps) => {
   const setupPosition : SetupElementType = { top: '0%', left: '0%', width: '100%', position: 'absolute' };
 
   return (
-    <Elements elements={characterElements} style={setupPosition}/>
+    <Elements elements={characterElements} style={setupPosition} onOpenComputerScreen={onOpenComputerScreen}/>
   );
 };
 

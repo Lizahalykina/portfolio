@@ -18,9 +18,10 @@ interface ElementsType {
   elements: ElementType[];
   style: SetupElementType;
   onOpenStickyNoteScreen?: () => void;
+  onOpenComputerScreen?: () => void;
 }
 
-const Elements = ({elements, style, onOpenStickyNoteScreen} : ElementsType) => {
+const Elements = ({elements, style, onOpenStickyNoteScreen, onOpenComputerScreen} : ElementsType) => {
 
   return (
     <div
@@ -39,6 +40,7 @@ const Elements = ({elements, style, onOpenStickyNoteScreen} : ElementsType) => {
             element={element.element}
             classname={element.classname}
             onOpenStickyNoteScreen={onOpenStickyNoteScreen}
+            onOpenComputerScreen={onOpenComputerScreen}
           />
         </div>
       )}

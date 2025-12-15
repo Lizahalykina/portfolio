@@ -12,6 +12,7 @@ import DetectiveDesk from './components/IntroScreen/DetectiveDesk/DetectiveDesk'
 import IntroductionBubble from './components/IntroScreen/IntroductionBubble/IntroductionBubble';
 import WeatherWindow from './components/WeatherWindow/WeatherWindow';
 import StickyNoteScreen from './components/StickyNoteScreen/StickyNoteScreen';
+import ComputerScreen from './components/ComputerScreen/ComputerScreen';
 import './App.css';
 
 
@@ -23,6 +24,7 @@ const App = () => {
   const [showIntroScreen, setShowIntroScreen] = useState(true);
   const [startActionAnimation, setStartActionAnimation] = useState(false);
   const [showStickyNoteScreen, setShowStickyNoteScreen] = useState(false);
+  const [showComputerScreen, setShowComputerScreen] = useState(false);
   const [showCaseFile, setShowCaseFile] = useState(false);
   const [caseFileEntering, setCaseFileEntering] = useState(false);
   const [roomFadeIn, setRoomFadeIn] = useState(false);
@@ -57,6 +59,10 @@ const App = () => {
     setShowStickyNoteScreen(false);
   };
 
+  const handleComputerScreenClose = () => {
+    setShowComputerScreen(false);
+  };
+
   return (
     <>
       {/* Floating under construction text - appears on all pages */}
@@ -65,7 +71,9 @@ const App = () => {
       </div>
       {showIntroScreen && <IntroScreen onComplete={handleIntroScreenComplete} />}
       <div className="black-screen" style={{ display: showIntroScreen ? 'none' : 'flex' }}>
-        {showStickyNoteScreen ? (
+        {showComputerScreen ? (
+          <ComputerScreen open={true} onClose={handleComputerScreenClose} />
+        ) : showStickyNoteScreen ? (
           <StickyNoteScreen open={true} onClose={handleStickyNoteScreenClose} />
         ) : (
           <>
@@ -83,7 +91,7 @@ const App = () => {
                 <div className="app-container">
                   {/* <WeatherWindow /> */}
                   <DrawerSetup />
-                  <CharacterSetup />
+                  <CharacterSetup onOpenComputerScreen={() => setShowComputerScreen(true)} />
                   <WallSetup onOpenStickyNoteScreen={() => setShowStickyNoteScreen(true)} />
                   <FloorSetup />
                 </div>
@@ -104,7 +112,7 @@ const App = () => {
               <div className="frame" style={{ backgroundImage: `url('/assets/Background.png')`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }}>
                 <div className="app-container">
                   <DrawerSetup />
-                  <CharacterSetup />
+                  <CharacterSetup onOpenComputerScreen={() => {}} />
                   <WallSetup onOpenStickyNoteScreen={() => {}} />
                   <FloorSetup />
                 </div>

@@ -1,0 +1,162 @@
+.computer-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.computer-screen.entering {
+  opacity: 1;
+}
+
+.computer-screen.closing {
+  opacity: 0;
+}
+
+.computer-screen-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.monitor-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.monitor-frame {
+  position: relative;
+  width: 90vw;
+  max-width: 1800px;
+  aspect-ratio: 32 / 9; /* 49-inch ultrawide monitor aspect ratio */
+}
+
+.monitor-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 20px 20px 20px 20px; /* Curved top edges, less curved bottom */
+  box-shadow: 
+    0 0 0 12px #1a1a1a, /* Outer bezel */
+    0 0 0 14px #2d2d2d, /* Inner bezel */
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monitor-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    transparent 20%,
+    transparent 80%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.screen-content {
+  position: relative;
+  width: calc(100% - 28px);
+  height: calc(100% - 28px);
+  background: #0a0a0a;
+  border-radius: 20px 20px 20px 20px;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Monitor stand */
+.monitor-stand {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 30px;
+  background: linear-gradient(180deg, #2d2d2d 0%, #1a1a1a 100%);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.monitor-base {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 20px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+}
+
+.computer-close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10001;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1920px) {
+  .monitor-frame {
+    width: 85vw;
+  }
+}
+
+@media (max-width: 1440px) {
+  .monitor-frame {
+    width: 95vw;
+    aspect-ratio: 21 / 9;
+  }
+}
+
+@media (max-width: 1024px) {
+  .monitor-frame {
+    width: 98vw;
+    aspect-ratio: 16 / 9;
+  }
+  
+  .monitor-stand {
+    width: 150px;
+    height: 25px;
+  }
+  
+  .monitor-base {
+    width: 250px;
+    height: 18px;
+  }
+}
+
